@@ -12,7 +12,10 @@ sst_core_sources += \
 	impl/partitioners/simplepart.cc \
 	impl/partitioners/simplepart.h \
 	impl/partitioners/singlepart.cc \
-	impl/partitioners/singlepart.h 
+	impl/partitioners/singlepart.h \
+	impl/partitioners/manual.cc \
+	impl/partitioners/manual.h
+
 
 if HAVE_ZOLTAN
 sst_core_sources += \
