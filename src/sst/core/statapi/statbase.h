@@ -445,6 +445,7 @@ struct ImplementsStatFields {
     cls##_##field##_##shortName(SST::BaseComponent* bc, const std::string& sn, \
            const std::string& si, SST::Params& p) : \
       cls<field>(bc,sn,si,p) {} \
+  __attribute__((used)) \
   static bool ELI_isLoaded() { \
      return SST::ELI::InstantiateBuilderInfo< \
         SST::Statistics::Statistic<field>,cls##_##field##_##shortName>::isLoaded() \

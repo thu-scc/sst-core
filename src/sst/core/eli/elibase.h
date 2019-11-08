@@ -135,7 +135,9 @@ private:
 
 #define SST_ELI_DECLARE_INFO_COMMON()                          \
   using InfoLibrary = ::SST::ELI::InfoLibrary<__LocalEliBase>; \
-  template <class __TT> static bool addDerivedInfo(const std::string& lib, const std::string& elem){ \
+  template <class __TT> \
+  __attribute__((used)) \
+  static bool addDerivedInfo(const std::string& lib, const std::string& elem){ \
     return addInfo(lib,elem,new BuilderInfo(lib,elem,(__TT*)nullptr)); \
   }
 
@@ -144,7 +146,9 @@ private:
   using __ParentEliBase = OldBase; \
   SST_ELI_DECLARE_INFO_COMMON() \
   static const char* ELI_baseName(){ return #NewBase; } \
-  template <class InfoImpl> static bool addInfo(const std::string& elemlib, const std::string& elem, \
+  template <class InfoImpl> \
+  __attribute__((used)) \
+  static bool addInfo(const std::string& elemlib, const std::string& elem, \
                                                 InfoImpl* info){ \
     return OldBase::addInfo(elemlib, elem, info) \
       && ::SST::ELI::InfoDatabase::getLibrary<NewBase>(elemlib)->addInfo(elem,info); \

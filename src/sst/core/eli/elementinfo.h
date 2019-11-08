@@ -276,7 +276,9 @@ constexpr unsigned SST_ELI_getTertiaryNumberFromVersion(SST_ELI_element_version_
 
 #define SST_ELI_DECLARE_INFO(...) \
   using BuilderInfo = ::SST::ELI::BuilderInfoImpl<__VA_ARGS__,SST::ELI::ProvidesDefaultInfo,void>; \
-  template <class BuilderImpl> static bool addInfo(const std::string& elemlib, const std::string& elem, \
+  template <class BuilderImpl> \
+  __attribute__((used)) \
+  static bool addInfo(const std::string& elemlib, const std::string& elem, \
                                    	     BuilderImpl* info){ \
     return ::SST::ELI::InfoDatabase::getLibrary<__LocalEliBase>(elemlib)->addInfo(elem,info); \
   } \
@@ -285,7 +287,9 @@ constexpr unsigned SST_ELI_getTertiaryNumberFromVersion(SST_ELI_element_version_
 
 #define SST_ELI_DECLARE_DEFAULT_INFO() \
   using BuilderInfo = ::SST::ELI::BuilderInfoImpl<SST::ELI::ProvidesDefaultInfo,void>; \
-  template <class BuilderImpl> static bool addInfo(const std::string& elemlib, const std::string& elem, \
+  template <class BuilderImpl> \
+  __attribute__((used)) \
+  static bool addInfo(const std::string& elemlib, const std::string& elem, \
                                                    BuilderImpl* info){ \
     return ::SST::ELI::InfoDatabase::getLibrary<__LocalEliBase>(elemlib)->addInfo(elem,info); \
   } \
@@ -294,15 +298,20 @@ constexpr unsigned SST_ELI_getTertiaryNumberFromVersion(SST_ELI_element_version_
 
 #define SST_ELI_DECLARE_INFO_EXTERN(...) \
   using BuilderInfo = ::SST::ELI::BuilderInfoImpl<SST::ELI::ProvidesDefaultInfo,__VA_ARGS__,void>; \
+  __attribute__((used)) \
+  static BuilderInfo __builder_info__; \
   static bool addInfo(const std::string& elemlib, const std::string& elem, BuilderInfo* info); \
   SST_ELI_DECLARE_INFO_COMMON()
 
 #define SST_ELI_DECLARE_DEFAULT_INFO_EXTERN() \
   using BuilderInfo = ::SST::ELI::BuilderInfoImpl<SST::ELI::ProvidesDefaultInfo,void>; \
+  __attribute__((used)) \
+  static BuilderInfo __builder_info__; \
   static bool addInfo(const std::string& elemlib, const std::string& elem, BuilderInfo* info); \
   SST_ELI_DECLARE_INFO_COMMON() 
 
 #define SST_ELI_DEFINE_INFO_EXTERN(base) \
+  __attribute__((used)) \
   bool base::addInfo(const std::string& elemlib, const std::string& elem, BuilderInfo* info){ \
     return ::SST::ELI::InfoDatabase::getLibrary<__LocalEliBase>(elemlib)->addInfo(elem,info); \
   }
