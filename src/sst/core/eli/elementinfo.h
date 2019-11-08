@@ -312,6 +312,7 @@ constexpr unsigned SST_ELI_getTertiaryNumberFromVersion(SST_ELI_element_version_
   SST_ELI_DEFAULT_INFO(lib,name,ELI_FORWARD_AS_ONE(version),desc)
 
 #define SST_ELI_REGISTER_DERIVED(base,cls,lib,name,version,desc) \
+  __attribute__((used)) \
   bool ELI_isLoaded() { \
     return SST::ELI::InstantiateBuilder<base,cls>::isLoaded() \
       && SST::ELI::InstantiateBuilderInfo<base,cls>::isLoaded(); \
@@ -319,11 +320,11 @@ constexpr unsigned SST_ELI_getTertiaryNumberFromVersion(SST_ELI_element_version_
   SST_ELI_DEFAULT_INFO(lib,name,ELI_FORWARD_AS_ONE(version),desc)
 
 #define SST_ELI_REGISTER_EXTERN(base,cls) \
+  __attribute__((used)) \
   bool cls::ELI_isLoaded(){ \
     return SST::ELI::InstantiateBuilder<base,cls>::isLoaded() \
       && SST::ELI::InstantiateBuilderInfo<base,cls>::isLoaded(); \
   }
-
 
 } //namespace SST
 
